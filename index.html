@@ -12,7 +12,11 @@
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>نموذج تأكيد المقاسات</title>
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
+.themebtn{position:absolute;top:10px;left:10px;width:42px;height:42px;padding:0;border-radius:50%;background:var(--card);color:var(--tx);border:1px solid var(--bd);font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.wrap{position:relative}
+
 :root{--bg:#f6f4ef;--card:#fff;--tx:#1d1b16;--mu:#6b665b;--bd:#ddd8cb;--ac:#b4531f;--ac2:#fff;--ok:#1f7a4d;--dg:#b3261e;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17150f;--card:#221f18;--tx:#f1ede3;--mu:#a49e8f;--bd:#3a3629;--ac:#e07a3f;--ac2:#17150f;--ok:#4cc38a;--dg:#ff8a80}}
@@ -84,6 +88,7 @@ details.adv{margin-bottom:8px}details.adv summary{font-size:13px;color:var(--mu)
 </head>
 <body>
 <div class="wrap">
+<button type="button" id="themeBtn" class="themebtn" aria-label="تبديل اللون">🌓</button>
 <h1>📐 نموذج تأكيد المقاسات والأبعاد</h1>
 <p class="sub">مؤسسة ألوان الحياة — يُحفظ على جهازك تلقائيًا تحت اسم كل مشروع</p>
 
@@ -643,5 +648,12 @@ window.addEventListener("resize",()=>fit(true));
 
 </script>
 <script>if('serviceWorker' in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
+<script>
+(function(){var b=document.getElementById("themeBtn"),r=document.documentElement,m=document.querySelector('meta[name="theme-color"]');
+function cur(){var t=r.getAttribute("data-theme");if(t)return t;return matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}
+function ui(){var d=cur()==="dark";b.textContent=d?"☀️":"🌙";if(m)m.setAttribute("content",d?"#17150f":"#b4531f")}
+b.addEventListener("click",function(){var n=cur()==="dark"?"light":"dark";r.setAttribute("data-theme",n);try{localStorage.setItem("theme",n)}catch(e){}ui()});
+ui()})();
+</script>
 </body>
 </html>
